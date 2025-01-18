@@ -14,9 +14,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        dotnet-version: [7.0.x, 8.0.x] # Include .NET 7 and .NET 8 versions
+    # strategy:
+    #   matrix:
+    #     dotnet-version: [7.0.x, 8.0.x] # Include .NET 7 and .NET 8 versions
 
     steps:
     - name: Checkout code
@@ -25,13 +25,13 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: ${{ matrix.dotnet-version }}
+        dotnet-version: 8.0.x
 
     - name: Restore dependencies
       run: dotnet restore src/PolygonApi/PolygonApi.csproj
 
     - name: Build
-      run: dotnet build --configuration Release --no-restore --framework ${{ matrix.dotnet-version }}
+      run: dotnet build --configuration Release --no-restore
 
     - name: Run tests
       run: dotnet test --configuration Release --no-restore --verbosity normal
