@@ -25,13 +25,13 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: ${{ matrix.dotnet-version }}
 
     - name: Restore dependencies
       run: dotnet restore src/PolygonApi/PolygonApi.csproj
 
     - name: Build
-      run: dotnet build src/PolygonApi/PolygonApi.csproj --configuration Release --no-restore
+      run: dotnet build --configuration Release --no-restore --framework ${{ matrix.dotnet-version }}
 
     - name: Run tests
       run: dotnet test --configuration Release --no-restore --verbosity normal
