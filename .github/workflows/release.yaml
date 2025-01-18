@@ -28,16 +28,16 @@ jobs:
         dotnet-version: 8.0.x
 
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore src/PolygonApi/PolygonApi.csproj
 
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build src/PolygonApi/PolygonApi.csproj --configuration Release --no-restore
 
     - name: Run tests
       run: dotnet test --configuration Release --no-restore --verbosity normal
 
     - name: Pack NuGet package
-      run: dotnet pack --configuration Release --output ./artifacts
+      run: dotnet pack src/PolygonApi/PolygonApi.csproj --configuration Release --output ./artifacts
 
     - name: Publish to NuGet (Pre-release or CI builds)
       if: github.event_name == 'push' && contains(github.ref, 'refs/heads')
