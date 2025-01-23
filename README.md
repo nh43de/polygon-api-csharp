@@ -1,2 +1,2 @@
 # polygon-api-cs
-An API client for Polygon.io made using refit.
+An C# API client for Polygon.io made using refit.
